@@ -1,0 +1,32 @@
+from math import *
+
+file = open("27_A_21932.txt")
+
+clust1 = []
+clust2 = []
+
+for line in file:
+    line = line.replace(',', '.')
+    x, y = map(float, line.split())
+    if y < 10: clust1.append((x, y))
+    else: clust2.append((x, y))
+
+mi = float(inf)
+center1 = 0
+center2 = 0
+for star in clust1:
+    dst = sum([dist(star, i) for i in clust1])
+    if dst < mi:
+        mi = dst
+        center1 = star
+mi = float(inf)
+for star in clust2:
+    dst = sum([dist(star, i) for i in clust2])
+    if dst < mi:
+        mi = dst
+        center2 = star
+
+if len(clust1) > len(clust2):
+    print(center2[0] * 10000, center1[1] * 10000)
+else:
+    print(center1[0] * 10000, center2[1] * 10000)
